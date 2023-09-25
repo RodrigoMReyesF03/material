@@ -1,3 +1,4 @@
+import math
 
 def quita_vocales(texto : str) -> str:
     vocales = "aeiouáéíóú"
@@ -26,29 +27,17 @@ def cambio(texto : str) -> str:
 
 def cifrado_cesar(texto : str, recorrido : int) -> str:
     texto = texto.lower()
+    abc = "abcdefghijklmnñopqrstuvwxyz"
     res = ""
     for letra in texto:
         if letra.isalpha():
-            if ord(letra) + recorrido > ord("z"):
-                res += chr(ord(letra) + recorrido - 26)
-            else:
-                res += chr(ord(letra) + recorrido)
+            res += abc[(abc.find(letra) + recorrido) % len(abc)]
         else:
             res += letra
     return res
 
 def descifrado_cesar(texto : str, recorrido : int) -> str:
-    texto = texto.lower()
-    res = ""
-    for letra in texto:
-        if letra.isalpha():
-            if ord(letra) - recorrido < ord("a"):
-                res += chr(ord(letra) - recorrido + 26)
-            else:
-                res += chr(ord(letra) - recorrido)
-        else:
-            res += letra
-    return res
+    return cifrado_cesar(texto, -recorrido)
         
 if __name__ == "__main__":
     # texto = "Hola Árbol Algo"
@@ -70,3 +59,6 @@ if __name__ == "__main__":
     print(f"Texto cifrado: {resultado}")
     original = descifrado_cesar(resultado, 3)
     print(f"Texto descifrado: {original}")
+    
+    # print(-3 - 27 * int(-3/27))
+    # print(-3 - 27 * math.floor(-3/27))
