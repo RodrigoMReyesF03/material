@@ -74,9 +74,13 @@ def multiplicacion_estandar(matriz1 : list, matriz2 : list) -> list:
     filas1, columnas1 = dimensiones_matriz(matriz1)
     filas2, columnas2 = dimensiones_matriz(matriz2)
     if columnas1 != filas2:
-        return None
+        return []
     matriz = crear_matriz_ceros(filas1, columnas2)
-    # Les queda de tarea
+    for fila in range(filas1):
+        for col in range(columnas2):
+            for j in range(columnas1):
+                matriz[fila][col] += matriz1[fila][j] * matriz2[j][col]
+    return matriz
 
 if __name__ == "__main__":
     matriz = crear_matriz_aleatoria(3,2)
